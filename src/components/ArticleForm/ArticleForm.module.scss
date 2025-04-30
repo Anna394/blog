@@ -1,0 +1,131 @@
+.createArticleContainer {
+  background: white;
+  padding: 48px 32px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  width: 938px;
+  margin: 0 auto;
+  box-shadow: 0px 2.93px 2.93px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  margin: 59px auto;
+  background-color: white;
+  padding: 48px 32px;
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: #262626;
+}
+
+.articleForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.textArea {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.tagsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tagItem {
+  display: flex;
+  gap: 8px;
+}
+
+.deleteButton {
+  border: 1px solid red;
+  background: white;
+  color: red;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 4px;
+  width: 118px;
+  height: 40px;
+  font-size: 16px;
+}
+
+.addButton {
+  border: 1px solid #1890ff;
+  background: white;
+  color: #1890ff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 4px;
+  width: 118px;
+  height: 40px;
+  font-size: 16px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: -16px;
+  margin-bottom: 10px;
+}
+
+.submitButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 4px;
+
+  width: 319px;
+  height: 40px;
+
+  background: #1890ff;
+  border-radius: 4px;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+}
+
+input::placeholder {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #bfbfbf;
+}
+
+textarea::placeholder {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #bfbfbf;
+}
+
+input,
+textarea {
+  margin-bottom: 21px;
+}

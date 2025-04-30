@@ -1,0 +1,60 @@
+.bodyArcticle {
+  margin: 10px auto;
+  width: 900px;
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  width: 900px;
+  background-color: white;
+  padding: 15px 16px;
+  gap: 5px;
+  font-family: "Inter";
+  border-radius: 5px;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+  height: 900px;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  line-height: 28px;
+  padding: 8px 16px;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 2px 20px;
+}
+
+.delete {
+  color: #f5222d;
+  border: 1px solid #f5222d;
+}
+
+.edit {
+  color: #52c41a;
+  border: 1px solid #52c41a;
+}
+
+.descriptionAndButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+
+  img {
+    max-width: 46px;
+    max-height: 46px;
+  }
+}

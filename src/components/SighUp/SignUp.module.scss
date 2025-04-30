@@ -1,0 +1,93 @@
+.signupform {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  height: auto;
+  margin: 59px auto;
+  background-color: white;
+  padding: 48px 32px;
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: #262626;
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+
+input {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  margin-bottom: 12px;
+}
+
+input::placeholder {
+  color: rgba(191, 191, 191, 1);
+  opacity: 1; /* чтобы не была полупрозрачной */
+}
+
+input:last-child {
+  margin-bottom: 0px;
+}
+
+.checkbox {
+  display: flex;
+  gap: 3px;
+  align-items: flex-start;
+  margin-bottom: 21px;
+}
+
+.create {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 4px;
+
+  width: 319px;
+  height: 40px;
+
+  background: #1890ff;
+  border-radius: 4px;
+  color: #ffffff;
+  margin-bottom: 8px;
+
+  font-size: 16px;
+}
+
+.signIn {
+  display: flex;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  color: #8c8c8c;
+  gap: 3px;
+
+  button {
+    color: #1890ff;
+  }
+}
+
+.inputError {
+  border: 1px solid #f5222d;
+  outline: none;
+}
+
+.error {
+  color: #f5222d;
+}
