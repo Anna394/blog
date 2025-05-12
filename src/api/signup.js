@@ -1,42 +1,43 @@
 import {
   fetchRegisterRequest,
   fetchRegisterSuccess,
-  fetchRegisterFailure,
-} from "../store/signReducer";
+  fetchRegisterFailure
+} from '../store/signReducer';
 
 export const fetchSignUp = (email, username, password) => {
   return async (dispatch) => {
     dispatch(fetchRegisterRequest());
 
     try {
-      const signUpResponse = await fetch(
-        "https://blog-platform.kata.academy/api/users",
+      const response = await fetch(
+        'https://blog-platform.kata.academy/api/users',
         {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            user: {
-              username: username,
-              email: email,
-              password: password,
-            },
-          }),
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user: { username, email, password } })
         }
       );
-      if (!signUpResponse.ok) {
-        throw new Error(
-          `Ошибка получения signUpResponse : ${signUpResponse.status}`
-        );
-      }
-      const signUpData = await signUpResponse.json();
-      console.log(signUpData);
 
-      dispatch(fetchRegisterSuccess(signUpData));
-    } catch (error) {
-      dispatch(fetchRegisterFailure(error.message));
-      console.log(error.message);
+      const result = await response.json();
+
+      if (!response.ok) {
+        dispatch(
+          fetchRegisterFailure(
+            result.errors || { message: 'Неизвестная ошибка' }
+          )
+        );
+        return false;
+      } else {
+        dispatch(fetchRegisterFailure(null));
+        dispatch(fetchRegisterSuccess(result.user));
+        console.log(result);
+        localStorage.setItem('user', JSON.stringify(result));
+        return true;
+      }
+    } catch (err) {
+      dispatch(fetchRegisterFailure({ message: err }));
+      console.error(err);
+      return false;
     }
   };
 };

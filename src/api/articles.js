@@ -1,16 +1,22 @@
 import {
   fetchDataRequest,
   fetchDataComplete,
-  fetchDataFailure,
-} from "../store/dataReducer";
+  fetchDataFailure
+} from '../store/dataReducer';
 
 export const fetchData = () => {
   return async (dispatch) => {
     dispatch(fetchDataRequest());
 
     try {
+      const tokenData = localStorage.getItem('user');
+      const token = tokenData ? JSON.parse(tokenData).user.token : null;
+
       const articleResponse = await fetch(
-        "https://blog-platform.kata.academy/api/articles"
+        'https://blog-platform.kata.academy/api/articles',
+        {
+          headers: token ? { Authorization: `Bearer ${token}` } : {}
+        }
       );
       if (!articleResponse.ok) {
         throw new Error(

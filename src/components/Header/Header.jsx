@@ -1,10 +1,10 @@
-import styles from "./Header.module.scss";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { fetchLogout } from "../../store/signReducer";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { fetchUser } from "../../api/getuser";
+import styles from './Header.module.scss';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { fetchLogout } from '../../store/signReducer';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchUser } from '../../api/getuser';
 
 function Header() {
   const navigate = useNavigate();
@@ -18,6 +18,8 @@ function Header() {
 
   const handleLogout = () => {
     dispatch(fetchLogout());
+    localStorage.removeItem('user');
+    navigate('/');
   };
 
   const signInClick = () => {
@@ -37,7 +39,7 @@ function Header() {
   };
 
   const mainPageClick = () => {
-    navigate("/");
+    navigate('/');
   };
 
   function HeaderLogin() {

@@ -1,19 +1,19 @@
 import { fetchSingleArticle } from '../store/dataReducer';
 
-export const updateArticle = (slug, articleData) => {
+export const setLike = (slug, isFavorited) => {
   return async (dispatch) => {
     try {
       const token = JSON.parse(localStorage.getItem('user')).user.token;
 
+      const method = isFavorited ? 'DELETE' : 'POST';
       const response = await fetch(
-        `https://blog-platform.kata.academy/api/articles/${slug}`,
+        `https://blog-platform.kata.academy/api/articles/${slug}/favorite`,
         {
-          method: 'PUT',
+          method: method,
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify({ article: articleData })
+          }
         }
       );
 
@@ -22,15 +22,13 @@ export const updateArticle = (slug, articleData) => {
         throw new Error(
           errorData.errors
             ? JSON.stringify(errorData.errors)
-            : 'Ошибка обновления статьи'
+            : 'Ошибка оценки статьи'
         );
       }
 
       const result = await response.json();
-      dispatch({ type: 'UPDATE_ARTICLE_SUCCESS', payload: result.article });
       dispatch(fetchSingleArticle(result.article));
     } catch (error) {
-      dispatch({ type: 'UPDATE_ARTICLE_FAILURE', payload: error.message });
     }
   };
 };

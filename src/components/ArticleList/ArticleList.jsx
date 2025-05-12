@@ -1,22 +1,26 @@
-import styles from "./ArticleList.module.scss";
-import Article from "../Article/Article";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import styles from './ArticleList.module.scss';
+import Article from '../Article/Article';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchData } from "../../api/articles";
+import { fetchData } from '../../api/articles';
 
 function ArticleList() {
   const dispatch = useDispatch();
-  const { articles } = useSelector((state) => state.data);
+  const { articles, loading } = useSelector((state) => state.data);
 
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
 
+  if (loading) {
+    return <div className={styles.loading}>Загрузка...</div>;
+  }
+
   return (
     <div className={styles.articlelist}>
       {articles.map((article) => (
-        <Article article={article} />
+        <Article key={article.slug} article={article} />
       ))}
     </div>
   );

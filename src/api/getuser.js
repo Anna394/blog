@@ -1,28 +1,28 @@
 import {
   fetchUserRequest,
   fetchUserSuccess,
-  fetchUserFailure,
-} from "../store/userReducer"; // Импортируй свои экшены
+  fetchUserFailure
+} from '../store/userReducer';
 
 export const fetchUser = () => {
   return async (dispatch) => {
     dispatch(fetchUserRequest());
 
     try {
-      const token = JSON.parse(localStorage.getItem("user"))?.user?.token;
+      const token = JSON.parse(localStorage.getItem('user'))?.user?.token;
 
       if (!token) {
-        throw new Error("Токен не найден в localStorage");
+        throw new Error('Токен не найден в localStorage');
       }
 
       const response = await fetch(
-        "https://blog-platform.kata.academy/api/user",
+        'https://blog-platform.kata.academy/api/user',
         {
-          method: "GET",
+          method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
+            'Content-Type': 'application/json'
+          }
         }
       );
 

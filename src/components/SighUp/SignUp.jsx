@@ -1,70 +1,81 @@
-import style from "./SignUp.module.scss";
-import { fetchSignUp } from "../../api/signup";
+import style from './SignUp.module.scss';
+import { fetchSignUp } from '../../api/signup';
 
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 function SignUp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const error = useSelector((state) => state.signUp.errors);
+
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors }
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const { email, username, password } = data;
-    dispatch(fetchSignUp(email, username, password));
-    navigate("/");
+    const success = await dispatch(fetchSignUp(email, username, password));
+    console.log(success);
+    if (success) {
+      navigate('/');
+    } else console.error('Ошибка регистрации');
   };
 
-  const password = watch("password");
+  const onSignIn = () => {
+    navigate('/signin');
+  };
+
+  const password = watch('password');
 
   return (
     <form className={style.signupform} onSubmit={handleSubmit(onSubmit)}>
       <h2>Create new account</h2>
       <label>Username</label>
       <input
-        className={errors.username ? style.inputError : ""}
+        className={errors.username || error?.username ? style.inputError : ''}
         type="text"
         placeholder="Username"
-        {...register("username", {
-          required: "Username is required",
-          minLength: { value: 3, message: "Minimum 3 characters" },
-          maxLength: { value: 20, message: "Maximum 20 characters" },
+        {...register('username', {
+          required: 'Username is required',
+          minLength: { value: 3, message: 'Minimum 3 characters' },
+          maxLength: { value: 20, message: 'Maximum 20 characters' }
         })}
       ></input>
       {errors.username && (
         <div className={style.error}>{errors.username.message}</div>
       )}
+      {error?.username && <div className={style.error}>{error.username}</div>}
       <label>Email address</label>
       <input
-        className={errors.email ? style.inputError : ""}
+        className={errors.email || error?.email ? style.inputError : ''}
         type="email"
         placeholder="Email address"
-        {...register("email", {
-          required: "Email is required",
+        {...register('email', {
+          required: 'Email is required',
           pattern: {
             value: /^\S+@\S+$/i,
-            message: "Invalid email format",
-          },
+            message: 'Invalid email format'
+          }
         })}
       ></input>
       {errors.email && (
         <div className={style.error}>{errors.email.message}</div>
       )}
+      {error?.email && <div className={style.error}>{error.email}</div>}
       <label>Password</label>
       <input
-        className={errors.password ? style.inputError : ""}
+        className={errors.password ? style.inputError : ''}
         type="password"
         placeholder="Password"
-        {...register("password", {
-          required: "Password is required",
-          minLength: { value: 6, message: "Min 6 characters" },
-          maxLength: { value: 40, message: "Max 40 characters" },
+        {...register('password', {
+          required: 'Password is required',
+          minLength: { value: 6, message: 'Min 6 characters' },
+          maxLength: { value: 40, message: 'Max 40 characters' }
         })}
       ></input>
       {errors.password && (
@@ -72,23 +83,23 @@ function SignUp() {
       )}
       <label>Repeat Password</label>
       <input
-        className={errors.repeatPassword ? style.inputError : ""}
+        className={errors.repeatPassword ? style.inputError : ''}
         type="password"
         placeholder="Password"
-        {...register("repeatPassword", {
-          required: "Repeat your password",
-          validate: (value) => value === password || "Passwords do not match",
+        {...register('repeatPassword', {
+          required: 'Repeat your password',
+          validate: (value) => value === password || 'Passwords do not match'
         })}
-      ></input>{" "}
+      ></input>{' '}
       {errors.repeatPassword && (
         <div className={style.error}>{errors.repeatPassword.message}</div>
       )}
       <div className={style.checkbox}>
         <input
-          className={errors.agree ? style.inputError : ""}
+          className={errors.agree ? style.inputError : ''}
           type="checkbox"
           name="agree"
-          {...register("agree", { required: "You must agree" })}
+          {...register('agree', { required: 'You must agree' })}
         />
         <label>I agree to the processing of my personal information</label>
         {errors.agree && (
@@ -100,7 +111,7 @@ function SignUp() {
       </button>
       <div className={style.signIn}>
         Already have an account?
-        <button> Sign In.</button>
+        <button onClick={onSignIn}> Sign In.</button>
       </div>
     </form>
   );

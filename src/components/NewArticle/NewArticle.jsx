@@ -1,7 +1,7 @@
-import { useDispatch } from "react-redux";
-import { createArticle } from "../../api/createarticle";
-import { useNavigate } from "react-router-dom";
-import ArticleForm from "../../components/ArticleForm/ArticleForm";
+import { useDispatch } from 'react-redux';
+import { createArticle } from '../../api/createarticle';
+import { useNavigate } from 'react-router-dom';
+import ArticleForm from '../../components/ArticleForm/ArticleForm';
 
 export default function NewArticlePage() {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ export default function NewArticlePage() {
 
   const handleCreate = (data) => {
     dispatch(createArticle(data));
-    navigate("/"); // Или куда нужно после создания
+    navigate('/');
   };
 
   return <ArticleForm onSubmit={handleCreate} mode="create" />;

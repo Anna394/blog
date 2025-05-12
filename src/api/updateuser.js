@@ -1,59 +1,54 @@
-import { fetchEdit } from "../store/signReducer";
-
-// Вспомогательная функция получения токена
-function getToken() {
-  try {
-    const stored = localStorage.getItem("user");
-    return JSON.parse(stored)?.user?.token || null;
-  } catch {
-    return null;
-  }
-}
+import { fetchEdit, fetchEditFailure } from '../store/signReducer';
+import { fetchUserSuccess } from '../store/userReducer';
 
 export const fetchUpdate = (username, email, newpassword, image) => {
   return async (dispatch) => {
-    const token = getToken();
-
-    if (!token) {
-      console.error("❌ Токен не найден. Пользователь не авторизован.");
-      return;
-    }
-
     const userData = {
       username,
-      email,
-      password: newpassword,
+      email
     };
+
+    if (newpassword) {
+      userData.password = newpassword;
+    }
 
     if (image) {
       userData.image = image;
     }
 
     try {
+      const token = JSON.parse(localStorage.getItem('user')).user.token;
+
       const response = await fetch(
-        "https://blog-platform.kata.academy/api/user",
+        'https://blog-platform.kata.academy/api/user',
         {
-          method: "PUT",
+          method: 'PUT',
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${token}`,
+            'Content-Type': 'application/json',
+            Authorization: `Token ${token}`
           },
-          body: JSON.stringify({ user: userData }),
+          body: JSON.stringify({ user: userData })
         }
       );
 
-      if (!response.ok) {
-        const errorText = await response.text(); // покажет ответ от сервера
-        console.warn("❌ Ошибка от сервера:", errorText);
-
-        console.log("📤 Отправленные данные:", userData, token);
-        throw new Error(`Ошибка обновления пользователя: ${response.status}`);
-      }
-
       const result = await response.json();
-      dispatch(fetchEdit(result));
+
+
+      if (!response.ok) {
+        dispatch(
+          fetchEditFailure(result.errors || { message: 'Неизвестная ошибка' })
+        );
+        return false;
+      } else {
+        dispatch(fetchEdit(result.user));
+        dispatch(fetchEditFailure(null));
+        dispatch(fetchUserSuccess(result.user));
+        return true;
+      }
     } catch (error) {
-      console.error("Ошибка при обновлении пользователя:", error.message);
+      dispatch(fetchEditFailure({ message: error }));
+      console.error(error);
+      return false;
     }
   };
 };

@@ -1,15 +1,15 @@
-const FETCH_USER_REQUEST = "FETCH_USER_REQUEST";
-const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
-const FETCH_USER_FAILURE = "FETCH_USER_FAILURE";
+const FETCH_USER_REQUEST = 'FETCH_USER_REQUEST';
+const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
+const FETCH_USER_FAILURE = 'FETCH_USER_FAILURE';
 
 const initialState = {
   loading: false,
   user: {
-    username: "",
-    Image: "",
-    token: "",
+    username: '',
+    Image: '',
+    token: ''
   },
-  error: null,
+  error: null
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -25,13 +25,12 @@ export const userReducer = (state = initialState, action) => {
   }
 };
 
-// Action creators
 export const fetchUserRequest = () => ({ type: FETCH_USER_REQUEST });
 export const fetchUserSuccess = (user) => ({
   type: FETCH_USER_SUCCESS,
-  payload: user,
+  payload: user
 });
 export const fetchUserFailure = (error) => ({
   type: FETCH_USER_FAILURE,
-  payload: error,
+  payload: error
 });

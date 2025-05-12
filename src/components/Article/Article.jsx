@@ -1,7 +1,6 @@
-import styles from "./Article.module.scss";
-import { useNavigate } from "react-router-dom";
-
-import heart from "../../heart.svg";
+import styles from './Article.module.scss';
+import { useNavigate } from 'react-router-dom';
+import Like from '../Like/Like';
 
 function Article({ article }) {
   const navigate = useNavigate();
@@ -12,10 +11,10 @@ function Article({ article }) {
 
   const formatDate = (date) => {
     const newdate = new Date(date);
-    return newdate.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
+    return newdate.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     });
   };
 
@@ -27,14 +26,13 @@ function Article({ article }) {
             <button className={styles.articleTitle} onClick={handleClick}>
               {article.title}
             </button>
-            <div className={styles.likes}>
-              <img src={heart} alt="Количество лайков"></img>
-              {article.favoritesCount}
-            </div>
+            <Like article={article} className={styles.likes} />
           </div>
           <div className={styles.tags}>
             {article.tagList.map((tag) => (
-              <div className={styles.tag}>{tag}</div>
+              <div key={tag} className={styles.tag}>
+                {tag}
+              </div>
             ))}
           </div>
         </div>

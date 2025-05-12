@@ -1,7 +1,7 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { updateArticle } from "../../api/editarticle"; // Ты создашь updateArticle
-import ArticleForm from "../../components/ArticleForm/ArticleForm";
+import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateArticle } from '../../api/editarticle'; // Ты создашь updateArticle
+import ArticleForm from '../../components/ArticleForm/ArticleForm';
 
 export default function EditArticlePage() {
   const { slug } = useParams();
@@ -14,7 +14,7 @@ export default function EditArticlePage() {
 
   const handleEdit = (data) => {
     dispatch(updateArticle(slug, data));
-    navigate(`/articles/${slug}`);
+    navigate(`/`);
   };
 
   return (
@@ -24,7 +24,7 @@ export default function EditArticlePage() {
         title: article.title,
         description: article.description,
         text: article.body,
-        tags: article.tagList || [],
+        tags: article.tagList || []
       }}
       mode="edit"
     />

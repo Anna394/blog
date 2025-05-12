@@ -11,7 +11,7 @@
   margin: 59px auto;
   background-color: white;
   padding: 48px 32px;
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-weight: 400;
   font-size: 14px;
   line-height: 22px;
@@ -105,10 +105,12 @@
   font-size: 16px;
   line-height: 24px;
   color: #ffffff;
+
+  border: none;
 }
 
 input::placeholder {
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -117,7 +119,7 @@ input::placeholder {
 }
 
 textarea::placeholder {
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;

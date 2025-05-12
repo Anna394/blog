@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import styles from "./ArticleForm.module.scss";
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import styles from './ArticleForm.module.scss';
 
-function ArticleForm({ onSubmit, initialData = {}, mode = "create" }) {
+function ArticleForm({ onSubmit, initialData = {}, mode = 'create' }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
+    setValue
   } = useForm();
 
   const [tagList, settagList] = useState(initialData.tagList || []);
-  const [newTag, setNewTag] = useState("");
+  const [newTag, setNewTag] = useState('');
 
   useEffect(() => {
-    if (mode === "edit") {
-      setValue("title", initialData.title || "");
-      setValue("description", initialData.description || "");
-      setValue("body", initialData.text || "");
+    if (mode === 'edit') {
+      setValue('title', initialData.title || '');
+      setValue('description', initialData.description || '');
+      setValue('body', initialData.text || '');
       settagList(initialData.tags || []);
     }
   }, [initialData, setValue, mode]);
@@ -25,9 +25,8 @@ function ArticleForm({ onSubmit, initialData = {}, mode = "create" }) {
   const handleFormSubmit = (data) => {
     const articleData = {
       ...data,
-      tagList,
+      tagList
     };
-    console.log(articleData);
     onSubmit(articleData);
   };
 
@@ -35,10 +34,9 @@ function ArticleForm({ onSubmit, initialData = {}, mode = "create" }) {
     if (newTag.trim()) {
       settagList((prevtagList) => {
         const updatedtagList = [...prevtagList, newTag.trim()];
-        console.log("Теги после добавления:", updatedtagList);
         return updatedtagList;
       });
-      setNewTag("");
+      setNewTag('');
     }
   };
 
@@ -49,7 +47,7 @@ function ArticleForm({ onSubmit, initialData = {}, mode = "create" }) {
 
   return (
     <div className={styles.createArticleContainer}>
-      <h2>{mode === "edit" ? "Edit article" : "Create new article"}</h2>
+      <h2>{mode === 'edit' ? 'Edit article' : 'Create new article'}</h2>
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
         className={styles.articleForm}
@@ -58,7 +56,7 @@ function ArticleForm({ onSubmit, initialData = {}, mode = "create" }) {
         <input
           type="text"
           placeholder="Title"
-          {...register("title", { required: "Title is required" })}
+          {...register('title', { required: 'Title is required' })}
           className={styles.inputField}
         />
         {errors.title && <p className={styles.error}>{errors.title.message}</p>}
@@ -67,8 +65,8 @@ function ArticleForm({ onSubmit, initialData = {}, mode = "create" }) {
         <input
           type="text"
           placeholder="Short description"
-          {...register("description", {
-            required: "Short description is required",
+          {...register('description', {
+            required: 'Short description is required'
           })}
           className={styles.inputField}
         />
@@ -80,7 +78,7 @@ function ArticleForm({ onSubmit, initialData = {}, mode = "create" }) {
         <textarea
           placeholder="Text"
           rows={6}
-          {...register("body", { required: "Text is required" })}
+          {...register('body', { required: 'Text is required' })}
           className={styles.textArea}
         />
         {errors.text && <p className={styles.error}>{errors.text.message}</p>}
@@ -123,7 +121,7 @@ function ArticleForm({ onSubmit, initialData = {}, mode = "create" }) {
         </div>
 
         <button type="submit" className={styles.submitButton}>
-          {mode === "edit" ? "Save changes" : "Send"}
+          {mode === 'edit' ? 'Save changes' : 'Send'}
         </button>
       </form>
     </div>
