@@ -1,5 +1,6 @@
 const initialState = {
   articles: [],
+  articlesCount: null,
   loading: false,
   error: null
 };
@@ -22,7 +23,8 @@ export function dataReducer(state = initialState, action) {
       return {
         ...state,
         articles: action.payload,
-        loading: false
+        loading: false,
+        articlesCount: action.articlesCount
       };
     case FETCH_DATA_FAILURE:
       return { ...state, loading: false, error: action.error };
@@ -39,9 +41,10 @@ export function dataReducer(state = initialState, action) {
 }
 
 export const fetchDataRequest = () => ({ type: FETCH_DATA_REQUEST });
-export const fetchDataComplete = (data) => ({
+export const fetchDataComplete = (data, articlesCount) => ({
   type: FETCH_DATA_COMPLETE,
-  payload: data
+  payload: data,
+  articlesCount: articlesCount
 });
 export const fetchDataFailure = (error) => ({
   type: FETCH_DATA_FAILURE,

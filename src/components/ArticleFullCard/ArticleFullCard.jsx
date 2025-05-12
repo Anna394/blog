@@ -79,7 +79,7 @@ function ArticleFullCard() {
               <span>{article.author.username}</span>
               <span>{formatDate(article.updatedAt)}</span>
             </div>
-            <img src={article.author.image} alt="Аватар"></img>
+            <img src={article.author.image} alt=""></img>
           </div>
         </div>
         <div className={styles2.descriptionAndButtons}>

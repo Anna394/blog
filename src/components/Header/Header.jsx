@@ -9,12 +9,14 @@ import { fetchUser } from '../../api/getuser';
 function Header() {
   const navigate = useNavigate();
   const { isAuthenticated } = useSelector((state) => state.signUp);
+  const token = useSelector((state) => state.signUp.token);
+
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUser());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   const handleLogout = () => {
     dispatch(fetchLogout());
@@ -51,7 +53,14 @@ function Header() {
           </button>
           <button className={styles.profile}>
             <div onClick={handleProfile}>{user.username}</div>
-            <img src={user.image} alt="аватар"></img>
+            <img
+              src={
+                user.image
+                  ? user.image
+                  : 'https://static.productionready.io/images/smiley-cyrus.jpg'
+              }
+              alt="аватар"
+            ></img>
           </button>
           <button onClick={handleLogout} className={styles.logOut}>
             Log out

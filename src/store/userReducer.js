@@ -6,7 +6,7 @@ const initialState = {
   loading: false,
   user: {
     username: '',
-    Image: '',
+    image: '',
     token: ''
   },
   error: null
