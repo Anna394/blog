@@ -37,7 +37,7 @@ export const fetchLogin = (email, password) => {
       } else {
         dispatch(fetchLoginFailure(null));
         dispatch(fetchLoginSuccess(loginData));
-        localStorage.setItem('user', JSON.stringify(loginData));
+        sessionStorage.setItem('user', JSON.stringify(loginData));
 
         return true;
       }

@@ -31,7 +31,7 @@ export const fetchSignUp = (email, username, password) => {
         dispatch(fetchRegisterFailure(null));
         dispatch(fetchRegisterSuccess(result.user));
         console.log(result);
-        localStorage.setItem('user', JSON.stringify(result));
+        sessionStorage.setItem('user', JSON.stringify(result));
         return true;
       }
     } catch (err) {

@@ -9,10 +9,10 @@ export const fetchUser = () => {
     dispatch(fetchUserRequest());
 
     try {
-      const token = JSON.parse(localStorage.getItem('user'))?.user?.token;
+      const token = JSON.parse(sessionStorage.getItem('user'))?.user?.token;
 
       if (!token) {
-        throw new Error('Токен не найден в localStorage');
+        throw new Error('Токен не найден в sessionStorage');
       }
 
       const response = await fetch(

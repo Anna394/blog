@@ -20,7 +20,7 @@ function Header() {
 
   const handleLogout = () => {
     dispatch(fetchLogout());
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
     navigate('/');
   };
 

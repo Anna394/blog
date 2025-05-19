@@ -10,7 +10,7 @@ export const fetchData = (page = 1, limit = 5) => {
     const offset = (page - 1) * limit;
 
     try {
-      const tokenData = localStorage.getItem('user');
+      const tokenData = sessionStorage.getItem('user');
       const token = tokenData ? JSON.parse(tokenData).user.token : null;
 
       const articleResponse = await fetch(

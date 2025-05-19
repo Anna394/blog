@@ -6,7 +6,7 @@ import {
 export const deleteArticle = (slug) => {
   return async (dispatch) => {
     try {
-      const token = JSON.parse(localStorage.getItem('user'))?.user?.token;
+      const token = JSON.parse(sessionStorage.getItem('user'))?.user?.token;
 
       if (!token) {
         throw new Error('Пользователь не авторизован');

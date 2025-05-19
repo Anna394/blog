@@ -3,7 +3,7 @@ import { fetchSingleArticle } from '../store/dataReducer';
 export const setLike = (slug, isFavorited) => {
   return async (dispatch) => {
     try {
-      const token = JSON.parse(localStorage.getItem('user')).user.token;
+      const token = JSON.parse(sessionStorage.getItem('user')).user.token;
 
       const method = isFavorited ? 'DELETE' : 'POST';
       const response = await fetch(
@@ -28,7 +28,6 @@ export const setLike = (slug, isFavorited) => {
 
       const result = await response.json();
       dispatch(fetchSingleArticle(result.article));
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 };

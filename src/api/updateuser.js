@@ -17,7 +17,7 @@ export const fetchUpdate = (username, email, newpassword, image) => {
     }
 
     try {
-      const token = JSON.parse(localStorage.getItem('user')).user.token;
+      const token = JSON.parse(sessionStorage.getItem('user')).user.token;
 
       const response = await fetch(
         'https://blog-platform.kata.academy/api/user',
@@ -32,7 +32,6 @@ export const fetchUpdate = (username, email, newpassword, image) => {
       );
 
       const result = await response.json();
-
 
       if (!response.ok) {
         dispatch(

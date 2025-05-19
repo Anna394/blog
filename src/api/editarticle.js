@@ -3,7 +3,7 @@ import { fetchSingleArticle } from '../store/dataReducer';
 export const updateArticle = (slug, articleData) => {
   return async (dispatch) => {
     try {
-      const token = JSON.parse(localStorage.getItem('user')).user.token;
+      const token = JSON.parse(sessionStorage.getItem('user')).user.token;
 
       const response = await fetch(
         `https://blog-platform.kata.academy/api/articles/${slug}`,
