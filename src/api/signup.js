@@ -30,7 +30,6 @@ export const fetchSignUp = (email, username, password) => {
       } else {
         dispatch(fetchRegisterFailure(null));
         dispatch(fetchRegisterSuccess(result.user));
-        console.log(result);
         sessionStorage.setItem('user', JSON.stringify(result));
         return true;
       }

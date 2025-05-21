@@ -7,9 +7,11 @@ export default function NewArticlePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleCreate = (data) => {
-    dispatch(createArticle(data));
-    navigate('/');
+  const handleCreate = async (data) => {
+    let success = await dispatch(createArticle(data));
+    if (success) {
+      navigate('/');
+    } else console.error('ошибка');
   };
 
   return <ArticleForm onSubmit={handleCreate} mode="create" />;
